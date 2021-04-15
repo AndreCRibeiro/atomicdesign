@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import GlobalStyles from './styles/global';
+
+import * as Atoms from './components/Atoms';
+import * as Organisms from './components/Organisms';
 
 function App() {
+  const [formInput, setFormInput] = useState({
+    user: '',
+    password: '',
+  });
+
+  const handleClick = () => {
+    console.log({ formInput })
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <Atoms.Container>
+        <Organisms.Form
+          title="Bem-vindo"
+          text="Preencha seus dados"
+          onChangePass={(e) => setFormInput(prevState => ({ ...prevState, user: e.target.value }))}
+          onChangeUser={(e) => setFormInput(prevState => ({ ...prevState, password: e.target.value }))}
+          buttonText="ENTRAR"
+          buttonClick={handleClick}
+        />
+      </Atoms.Container>
+
+    </>
   );
 }
 
